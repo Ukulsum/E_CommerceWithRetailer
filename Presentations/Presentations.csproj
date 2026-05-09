@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\Accounts\" />
+    <Folder Include="Services\Assert\" />
+    <Folder Include="Services\CRM\" />
+    <Folder Include="Services\Files\" />
+    <Folder Include="Services\Inventory\" />
+    <Folder Include="Services\ProductSetup\" />
+  </ItemGroup>
+
+</Project>
