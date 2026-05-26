@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    @*
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title> *@
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>
+        @if (!string.IsNullOrWhiteSpace(ViewBag.Title))
+        {
+        @ViewBag.Title
+        @: -
+        }
+        UK SALIFY
+    </title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+   @*  <link rel="stylesheet" href="/bundles/css" />
+    <link rel="stylesheet" href="/bundles/thirdPartyCss" /> *@
+
+    <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />-->   <!-- claude-->
+    <link href="/Content/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/css/select2.min.css" rel="stylesheet" />
+    @* ---- css --- *@
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap-select.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/css/icheck/blue.min.css" rel="stylesheet" />
+    <link href="~/Content/css/AdminLTE.css" rel="stylesheet" />
+    @* <link href="~/Content/css/skins/skin-blue.css" rel="stylesheet" /> *@
+    <link href="~/Content/css/skins/skin-green.css" rel="stylesheet" />
+    @* l *@
+    @* <link href="~/Content/css/jquery-ui.css" rel="stylesheet" /> *@
+
+
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/rowReorder.dataTables.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/responsive.dataTables.css" rel="stylesheet" />
+    <link href="~/Content/jquery.fancybox.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+
+    <style>
+        .fancybox-inner {
+            height: 90vh !important;
+        }
+
+        .select2-selection__rendered {
+            line-height: 30px !important;
+        }
+
+        .select2-container .select2-selection--single {
+            height: 33px !important;
+        }
+
+        .select2-selection__arrow {
+            height: 33px !important;
+        }
+
+        .fancybox-inner {
+            height: 90vh !important;
+        }
+
+        #form-wrraper label {
+            font-weight: 400;
+        }
+
+        #footer {
+            position: fixed;
+            overflow: inherit;
+            margin-left: 0;
+            width: 100%;
+            bottom: 0;
+            /*background-color: #3c8dbc;*/
+            background-color: #5E68A5;
+            /*background-color: darkcyan;*/
+            color: #ffffff;
+            text-align: center;
+            z-index: 1030;
+        }
+
+        .footerP {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+@* <body class="hold-transition skin-blue sidebar-mini"> *@
+<body class="hold-transition skin-green sidebar-mini">
+    <div class="wrapper">
+        <partial name="_Header" />
+        <partial name="_Sidebar" />
+
+        <div class="content-wrapper">
+            <section class="content">
+                @RenderBody()
+            </section>
+        </div>
+
+        <footer id="footer">
+            <div>
+                <p class="footerP">&copy; @DateTime.Now.Year - Umme Kulsum&nbsp;&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;&nbsp;Power By: UK Limited</p>
+            </div>
+        </footer>
+    </div>
+
+
+    <script>
+        $(function () {
+
+            var url = window.location;
+
+            // for sidebar menu entirely but not cover treeview
+            $('ul.sidebar-menu a').filter(function () {
+                return this.href == url;
+            }).parent().addClass('active');
+
+            // for treeview
+            $('ul.treeview-menu a').filter(function () {
+                return this.href == url;
+            }).parentsUntil(".sidebar-menu > .treeview-menu").addClass('active');
+
+
+        });
+
+    </script>
+    <!--<script src="~/lib/jquery/dist/jquery.min.js"></script>  // claude-->
+
+   @*  <script src="/bundles/js"></script>
+    <script src="/bundles/thirdPartyjs"></script> *@
+
+    <script src="/Content/jquery-ui.js"></script>
+    <script src="~/Scripts/Site.js"></script>
+    <script src="~/Scripts/select2.min.js"></script>
+
+    @* df *@
+    <script src="~/Content/js/plugins/jquery/jquery-3.3.1.js"></script>
+    <script src="~/Content/js/plugins/jquery/jquery-ui.js"></script>
+    <script src="~/Content/js/plugins/bootstrap/bootstrap.js"></script>
+    <script src="~/Content/jquery-ui.js"></script>
+    <script src="~/Content/js/plugins/fastclick/fastclick.js"></script>
+    <script src="~/Content/js/plugins/slimscroll/jquery.slimscroll.js"></script>
+    <script src="~/Content/js/plugins/bootstrap-select/bootstrap-select.js"></script>
+    <script src="~/Content/js/plugins/moment/moment.js"></script>
+    <script src="~/Content/js/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Content/js/plugins/icheck/icheck.js"></script>
+    <script src="~/Content/js/plugins/validator/validator.js"></script>
+    <script src="~/Content/js/plugins/inputmask/jquery.inputmask.bundle.js"></script>
+    <script src="~/Content/js/adminlte.js"></script>
+    <script src="~/Content/js/init.js"></script>
+
+
+    @* ll *@
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.rowReorder.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.responsive.js"></script>
+    <script src="~/Scripts/bootbox.js"></script>
+    <script src="~/Scripts/select2.js"></script>
+    <script src="~/Scripts/toastr.js"></script>
+    <script src="~/Scripts/Site.js"></script>
+
+
+
+
+    <!--<div>
+        @RenderBody()
+    </div>-->
+    @await RenderSectionAsync("Styles", required: false)
+
+</body>
+</html>
+
+
+
+
+
+

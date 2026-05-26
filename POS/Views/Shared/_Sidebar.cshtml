@@ -1,0 +1,127 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject IHttpContextAccessor HttpContextAccessor
+@* @inject Persistence.Repositories.Reports.Identities.IdentityRepository identityService
+ *@
+
+ <style>
+    .main-sidebar {
+        background: linear-gradient(160deg, #0a3d1f 0%, #0d5c2e 60%, #0f6e38 100%);
+        width: 240px;
+        min-height: 100vh;
+        border-right: 0.5px solid #1a6b35;
+        font-family: inherit;
+    }
+
+    .sidebar-brand {
+        padding: 20px 18px 16px;
+        border-bottom: 0.5px solid rgba(255,255,255,0.1);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .brand-icon {
+        width: 34px;
+        height: 34px;
+        background: rgba(255,255,255,0.15);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .brand-icon i {
+            color: #a8f0c0;
+            font-size: 16px;
+        }
+
+    .brand-name {
+        font-size: 15px;
+        font-weight: 500;
+        color: #fff;
+    }
+
+    .brand-sub {
+        font-size: 11px;
+        color: rgba(255,255,255,0.45);
+    }
+
+
+ </style>
+
+@* <aside class="main-sidebar" style="background-color:#21243D"> *@
+<aside class="main-sidebar">
+    <section class="sidebar">
+
+        <div class="sidebar-brand">
+            <div class="brand-icon">
+                <i class="fa fa-cube"></i>
+            </div>
+            <div>
+                <div class="brand-name">POS App</div>
+                <div class="brand-sub">Management System</div>
+            </div>
+        </div>
+
+        @{
+            var userId = User?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+            //var roleInfo = identityService.GetRoleInfoByUserId(userId);
+            //var roleId = roleInfo?.RoleId ?? 0;
+
+            // var parentMenus = identityService
+            // .GetParentMenu(roleId)
+            // .Where(x => x.ModuleId == 0 || x.ModuleId == 99)
+            // .ToList();
+        }
+
+        <ul class="sidebar-menu" data-widget="tree">
+
+            <!-- Dashboard -->
+            <li>
+                <a asp-controller="Home" asp-action="Module" style="color:#ffffff">
+                    @* <i class="fa fa-home" style="color:#ffffff"></i> *@
+                    <i class="fa fa-home" style="color: #6de0a0; font-size: 20px;"></i>
+                    <span>Main Dashboard</span>
+                </a>
+            </li>
+
+           @*  @foreach (var parent in parentMenus)
+            {
+                <li class="treeview">
+
+                    <a href="#">
+                        <i class="fa fa-cogs"></i>
+                        <span>@parent.Menu</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+
+                    <ul class="treeview-menu">
+
+                        @{
+                            var children = identityService
+                            .GetChildMenu(roleId, parent.MenuId, 0)
+                            .ToList();
+                        }
+
+                        @foreach (var child in children)
+                        {
+                            <li>
+                                <a asp-controller="@child.ControllerName"
+                                   asp-action="@child.ActionMethodName">
+                                    <i class="fa fa-long-arrow-right"></i>
+                                    @child.PageTitle
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+                </li>
+            } *@
+
+        </ul>
+
+    </section>
+</aside>

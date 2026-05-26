@@ -1,10 +1,4 @@
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Identity.Abstractions;
-using Microsoft.Identity.Web;
-using Microsoft.Identity.Web.Resource;
-
-namespace POS
+﻿namespace POS
 {
     public class Program
     {
@@ -13,40 +7,98 @@ namespace POS
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
-            builder.Services.AddAuthorization();
 
+            builder.Services.AddControllersWithViews();
+
+
+            //builder.Services.AddWebOptimizer(pipeline =>
+            //{
+            //    // CSS BUNDLE (MVC5: ~/Bundles/css)
+            //    pipeline.AddCssBundle("/bundles/css",
+            //        "Content/css/bootstrap.min.css",
+            //        "Content/css/bootstrap-select.css",
+            //        "Content/css/bootstrap-datepicker3.min.css",
+            //        "Content/css/font-awesome.min.css",
+            //        "Content/css/icheck/blue.min.css",
+            //        "Content/css/AdminLTE.css",
+            //        "Content/css/skins/skin-blue.css",
+            //        "Content/css/jquery-ui.css"
+            //    );
+
+            //    // JS BUNDLE (MVC5: ~/Bundles/js)
+            //    pipeline.AddJavaScriptBundle("/bundles/js",
+            //        "Content/js/plugins/jquery/jquery-3.3.1.js",
+            //        "Content/js/plugins/jquery/jquery-ui.js",
+            //        "Content/js/plugins/bootstrap/bootstrap.js",
+            //        "Content/jquery-ui.js",
+            //        "Content/js/plugins/fastclick/fastclick.js",
+            //        "Content/js/plugins/slimscroll/jquery.slimscroll.js",
+            //        "Content/js/plugins/bootstrap-select/bootstrap-select.js",
+            //        "Content/js/plugins/moment/moment.js",
+            //        "Content/js/plugins/datepicker/bootstrap-datepicker.js",
+            //        "Content/js/plugins/icheck/icheck.js",
+            //        "Content/js/plugins/validator/validator.js",
+            //        "Content/js/adminlte.js",
+            //        "Content/js/init.js"
+            //    );
+
+            //    // THIRD PARTY CSS
+            //    pipeline.AddCssBundle("/bundles/thirdPartyCss",
+            //        "Content/DataTables/css/jquery.dataTables.min.css",
+            //        "Content/DataTables/css/rowReorder.dataTables.css",
+            //        "Content/DataTables/css/responsive.dataTables.css",
+            //        "Content/jquery.fancybox.css",
+            //        "Content/jquery-ui.css",
+            //        "Content/toastr.css"
+            //    );
+
+            //    // THIRD PARTY JS
+            //    pipeline.AddJavaScriptBundle("/bundles/thirdPartyjs",
+            //        "Scripts/DataTables/jquery.dataTables.min.js",
+            //        "Scripts/DataTables/dataTables.rowReorder.js",
+            //        "Scripts/DataTables/dataTables.responsive.js",
+            //        "Scripts/select2.js",
+            //        "Scripts/toastr.js",
+            //        "Scripts/bootbox.js",
+            //        "Scripts/Site.js"
+            //    );
+            //});
+
+
+
+            // HttpContext
+            builder.Services.AddHttpContextAccessor();
+
+            // Session services
+            builder.Services.AddDistributedMemoryCache();
+
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseSession(); // 🔴 MUST
 
             app.UseAuthorization();
 
-            var scopeRequiredByApi = app.Configuration["AzureAd:Scopes"] ?? "";
-            var summaries = new[]
-            {
-                "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-            };
 
-            app.MapGet("/weatherforecast", (HttpContext httpContext) =>
-            {
-                httpContext.VerifyUserHasAnyAcceptedScope(scopeRequiredByApi);
+            app.MapControllers();
 
-                var forecast = Enumerable.Range(1, 5).Select(index =>
-                    new WeatherForecast
-                    {
-                        Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                        TemperatureC = Random.Shared.Next(-20, 55),
-                        Summary = summaries[Random.Shared.Next(summaries.Length)]
-                    })
-                    .ToArray();
-                return forecast;
-            })
-            .RequireAuthorization();
+            //app.MapGet("/", () => "POS API Running...");
+            app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }

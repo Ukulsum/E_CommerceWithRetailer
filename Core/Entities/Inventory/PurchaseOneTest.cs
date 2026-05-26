@@ -1,5 +1,6 @@
 ﻿using Core.Entities.Accounts;
 using Core.Entities.Files;
+using Core.Entities.UserSettings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
