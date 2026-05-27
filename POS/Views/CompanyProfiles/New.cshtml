@@ -5,11 +5,7 @@
     var imageUrl = "/Images/file-photo-o.png";
 }
 
-<style>
-    .input {
-        height: 30px;
-    }
-</style>
+<link href="~/Content/css/style.css" rel="stylesheet"></link>
 
 
 <div class="row">
@@ -18,11 +14,36 @@
         {
             @Html.AntiForgeryToken()
             <div class="panel panel-default">
-                <div class="panel-heading"><a class="panel-title" style="font-size: 20px">ADD NEW COMPANY</a></div>
+
+                <!-- HEADER -->
+                <div class="panel-heading">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="7" width="20" height="14" rx="2" />
+                        <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                        <line x1="12" y1="12" x2="12" y2="16" />
+                        <line x1="10" y1="14" x2="14" y2="14" />
+                    </svg>
+                    <a class="panel-title" style="font-size: 20px">ADD NEW COMPANY</a>
+                </div>
                 <div class="panel-body">
 
+                    <!-- SEARCH -->
+
                     <div class="col-md-10 col-sm-10 col-md-offset-1">
-                        <div class="form-group form-horizontal">
+                        <div class="search-wrap">
+                            <input type="text" id="SearchTextBox" placeholder="Search by company name…" />
+                            <button class="search-btn" id="btnSearch" title="Search">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-10 col-sm-10 col-md-offset-1">
+                        @*  <div class="form-group form-horizontal">
                             <div class="form-group">
                                 <div class="col-md-3 col-sm-3">
                                     <label class="control-label"></label>
@@ -35,144 +56,303 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </div> *@
+
+
                         <div class="form-group form-horizontal">
-                            <div class="form-group">
-                                <div class="col-md-3 col-sm-3">
-                                    <label for="CompanyName" class="control-label">Company Name <i style="color: red"> *</i></label>
-                                </div>
-                                <div class="col-md-8 col-sm-10">
-                                    <input type="text" name="CompanyName" class="form-control" id="CompanyName" style="width: 100%;" />
-                                    @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger", @id = "CompanyNameVal" })
-                                </div>
+                            <p class="section-label">Basic Information</p>
+                            @* <div class="form-group"> *@
+                            <div class="form-row">
+                                @* <div class="col-md-3 col-sm-3"> *@
+                                <label for="CompanyName" class="control-label">Company Name <i style="color: red"> *</i></label>
+                                @* </div>
+                                <div class="col-md-8 col-sm-10"> *@
+                                <input type="text" name="CompanyName" class="form-control" id="CompanyName" style="width: 100%;" placeholder="Enter company name" />
+                                @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger", @id = "CompanyNameVal" })
+                                @* </div> *@
                             </div>
                         </div>
                         <div class="form-group form-horizontal">
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                    <label for="Address" class="control-label">Address <i style="color: red"> *</i></label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" name="Address" id="Address" class="form-control" style="width: 100%" />
-                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger", @id = "AddressVal" })
-                                </div>
+                            @* <div class="form-group"> *@
+                            <div class="form-row">
+                                @* <div class="col-md-3"> *@
+                                <label for="Address" class="control-label">Address <i style="color: red"> *</i></label>
+                                @*  </div>
+                                <div class="col-md-8"> *@
+                                <input type="text" name="Address" id="Address" class="form-control" style="width: 100%" placeholder="Enter full address" />
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger", @id = "AddressVal" })
+                                @* </div> *@
                             </div>
                         </div>
                         <div class="form-group form-horizontal">
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                    <label for="Website" class="control-label">Website</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" name="Website" id="Website" class="form-control" style="width: 100%" />
-                                    @Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger", @id = "WebsiteVal" })
-                                </div>
+                            @* <div class="form-group"> *@
+                            <div class="form-row">
+                                @* <div class="col-md-3"> *@
+                                <label for="Website" class="control-label">Website</label>
+                                @*  </div>
+                                <div class="col-md-8"> *@
+                                <input type="text" name="Website" id="Website" class="form-control" style="width: 100%" placeholder="https://example.com" />
+                                @Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger", @id = "WebsiteVal" })
+                                @* </div> *@
                             </div>
                         </div>
                         <div class="form-group form-horizontal">
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                    <label for="Director" class="control-label">Director</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" name="Director" id="Director" class="form-control" style="width: 100%" />
-                                    @Html.ValidationMessageFor(model => model.Director, "", new { @class = "text-danger", @id = "DirectorVal" })
-                                </div>
+                            @* <div class="form-group"> *@
+                            <div class="form-row">
+                                @* <div class="col-md-3"> *@
+                                <label for="Director" class="control-label">Director</label>
+                                @* </div>
+                                <div class="col-md-8"> *@
+                                <input type="text" name="Director" id="Director" class="form-control" style="width: 100%" placeholder="Director's full name" />
+                                @Html.ValidationMessageFor(model => model.Director, "", new { @class = "text-danger", @id = "DirectorVal" })
+                                @* </div> *@
+                            </div>
+                        </div>
+
+                        <hr class="divider" />
+
+                        <!-- CONTACT -->
+                        <p class="section-label">Contact Details</p>
+
+                        <div class="form-group form-horizontal">
+                            @* <div class="form-group"> *@
+                            <div class="form-row">
+                                @* <div class="col-md-3"> *@
+                                <label for="PhoneNo" class="control-label">Phone No<i style="color: red"> *</i></label>
+                                @* </div>
+                                <div class="col-md-8"> *@
+                                <input type="text" name="PhoneNo" id="PhoneNo" class="form-control" style="width: 100%" placeholder="+880 XXXX XXXXXX" maxlength="14" />
+                                @Html.ValidationMessageFor(model => model.PhoneNo, "", new { @class = "text-danger", @id = "PhoneNoVal" })
+                                @* </div> *@
                             </div>
                         </div>
                         <div class="form-group form-horizontal">
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                    <label for="PhoneNo" class="control-label">Phone No<i style="color: red"> *</i></label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" name="PhoneNo" id="PhoneNo" class="form-control" style="width: 100%" placeholder="" maxlength="14" />
-                                    @Html.ValidationMessageFor(model => model.PhoneNo, "", new { @class = "text-danger", @id = "PhoneNoVal" })
-                                </div>
+                            @* <div class="form-group"> *@
+                            <div class="form-row">
+                                @* <div class="col-md-3"> *@
+                                <label for="Email" class="control-label">Email</label>
+                                @* </div>
+                                <div class="col-md-8"> *@
+                                <input type="text" name="Email" id="Email" class="form-control" style="width: 100%" placeholder="company@email.com" />
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", @id = "EmailVal" })
+                                @* </div> *@
                             </div>
                         </div>
+
+
+                        <hr class="divider" />
+
+                        <!-- BRANDING -->
+                        <p class="section-label">Branding &amp; Other</p>
                         <div class="form-group form-horizontal">
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                    <label for="Email" class="control-label">Email</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" name="Email" id="Email" class="form-control" style="width: 100%" />
-                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", @id = "EmailVal" })
-                                </div>
+                            @* <div class="form-group"> *@
+                            <div class="form-row">
+                                @* <div class="col-md-3"> *@
+                                <label for="PrincipleNote" class="control-label">Slogans</label>
+                                @* </div>
+                                <div class="col-md-8"> *@
+                                <input type="text" name="PrincipleNote" class="form-control" id="PrincipleNote" style="width: 100%" placeholder="Company slogan or motto" />
+                                @Html.ValidationMessageFor(model => model.PrincipleNote, "", new { @class = "text-danger", @id = "PrincipleNoteVal" })
+                                @* </div> *@
                             </div>
                         </div>
+
                         <div class="form-group form-horizontal">
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                    <label for="PrincipleNote" class="control-label">Slogans</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" name="PrincipleNote" class="form-control" id="PrincipleNote" style="width: 100%" />
-                                    @Html.ValidationMessageFor(model => model.PrincipleNote, "", new { @class = "text-danger", @id = "PrincipleNoteVal" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group form-horizontal">
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                    <label for="AreaCode" class="control-label">Area </label>
-                                </div>
-                                <div class="col-md-3">
-                                    <input type="text" name="AreaCode" id="AreaCode" class="form-control" style="width: 100%" />
+                            <div class="form-row-2">
+                                <label for="AreaCode" class="control-label">Area </label>
+                                <div>
+                                    <input type="text" name="AreaCode" id="AreaCode" class="form-control" style="width: 100%" placeholder="Area code" />
                                     @Html.ValidationMessageFor(model => model.AreaCode, "", new { @class = "text-danger", @id = "AreaCodeVal" })
                                 </div>
-                                <div class="col-md-2">
-                                    <label for="TinNo" class="control-label">BIN</label>
-                                </div>
-                                <div class="col-md-3">
-                                    <input type="text" name="TinNo" class="form-control" id="TinNo" style="width: 100%" maxlength="12" />
+                                <label for="TinNo" class="control-label">BIN</label>
+                                <div>
+                                    <input type="text" name="TinNo" class="form-control" id="TinNo" style="width: 100%" placeholder="BIN number" maxlength="12" />
                                     @Html.ValidationMessageFor(model => model.TinNo, "", new { @class = "text-danger", @id = "TinNoVal" })
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group form-horizontal">
-                            <div class="form-group">
-                                <div class="col-md-3" style="padding-right: 0">
-                                    <label for="PrintMessage" class="control-label">Tag Lines</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" name="PrintMessage" class="form-control" id="PrintMessage" style="width: 100%" />
-                                    @Html.ValidationMessageFor(model => model.PrintMessage, "", new { @class = "text-danger", @id = "PrintMessageVal" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group form-horizontal">
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                    <label class="control-label">Logo<i style="color: red"> *</i></label><br />
 
+
+                        @* <div class="form-group form-horizontal">
+                             <div class="form-group"> 
+                                 <div class="col-md-3"> 
+                                    <label for="AreaCode" class="control-label">Area </label>
                                 </div>
-                                <div class="col-md-9">
-                                    <input class="form-control" type="hidden" name="LogoUrl" id="LogoUrl" />
-                                    <input class="form-control" id="ImageUpload" name="Image" type="file" accept=".png, .jpg" style="width: 88%" />
-                                    <img src="@imageUrl" id="companyImage" class="img-thumbnail" height="160px" width="140px" />
+                                <div class="col-md-3"> 
+                                    <input type="text" name="AreaCode" id="AreaCode" class="form-control" style="width: 100%" placeholder="Area code" />
+                                    @Html.ValidationMessageFor(model => model.AreaCode, "", new { @class = "text-danger", @id = "AreaCodeVal" })
+                                 </div>
+                            <div class="col-md-2"> 
+
+                                    <label for="TinNo" class="control-label">BIN</label>
                                 </div>
-                                <br />
-                                <br />
+                                <div class="col-md-3"> 
+                                    <input type="text" name="TinNo" class="form-control" id="TinNo" style="width: 100%" placeholder="BIN number" maxlength="12" />
+                                    @Html.ValidationMessageFor(model => model.TinNo, "", new { @class = "text-danger", @id = "TinNoVal" })
+                                </div>
+                            </div>
+                        </div> *@
+                        <div class="form-group form-horizontal">
+                            @* <div class="form-group"> *@
+                            <div class="form-row">
+                                @* <div class="col-md-3" style="padding-right: 0"> *@
+                                <label for="PrintMessage" class="control-label">Tag Lines</label>
+                                @* </div> 
+                                <div class="col-md-8"> *@
+                                <input type="text" name="PrintMessage" class="form-control" id="PrintMessage" style="width: 100%" placeholder="Print tagline" />
+                                @Html.ValidationMessageFor(model => model.PrintMessage, "", new { @class = "text-danger", @id = "PrintMessageVal" })
+                                @* </div> *@
                             </div>
                         </div>
+
+                        <!-- LOGO -->
+                        @* <div class="form-group form-horizontal">
+                            <div class="logo-section">
+                                <label class="control-label">Logo<i style="color: red"> *</i></label><br />
+                                <label>Logo<i style="color: red"> *</i></label>
+                                <label>Logo <span class="req">*</span></label>
+                            </div>
+                            <div class="logo-inner">
+                                <input class="form-control" type="hidden" name="LogoUrl" id="LogoUrl" />
+                                <div class="img-preview" id="previewBox" onclick="document.getElementById('ImageUpload').click()">
+                                    <img src="@imageUrl" id="companyImage" class="img-thumbnail" height="160px" width="140px" />
+                                    <img src="@imageUrl" id="companyImage"  alt="Logo preview" />
+                                    <img id="companyImage" src="" alt="Logo preview" />
+                                    <svg id="previewIcon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                                        <circle cx="8.5" cy="8.5" r="1.5" />
+                                        <polyline points="21 15 16 10 5 21" />
+                                    </svg>
+                                    <span id="previewText">Preview</span>
+                                </div>
+
+                                <div class="file-info">
+                                    <p>Upload company logo<br />Accepted: .jpg, .png</p>
+                                    <label class="file-btn" for="ImageUpload">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                            <polyline points="17 8 12 3 7 8" />
+                                            <line x1="12" y1="3" x2="12" y2="15" />
+                                        </svg>
+                                        Choose File
+                                    </label>
+                                    <input type="file" id="ImageUpload" name="Image" accept=".png,.jpg" />
+                                </div>
+                            </div>
+                        </div> *@
+
+
+                        @*  <div class="logo-section">
+                            <label>Logo <span class="req">*</span></label>
+                            <div class="logo-inner">
+                                <div class="img-preview" id="previewBox" onclick="document.getElementById('ImageUpload').click()">
+                                    <img id="companyImage" src="" alt="Logo preview" />
+                                    <svg id="previewIcon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                                        <circle cx="8.5" cy="8.5" r="1.5" />
+                                        <polyline points="21 15 16 10 5 21" />
+                                    </svg>
+                                    <span id="previewText">Preview</span>
+                                </div>
+                                <div class="file-info">
+                                    <p>Upload company logo<br />Accepted: .jpg, .png</p>
+                                    <label class="file-btn" for="ImageUpload">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                            <polyline points="17 8 12 3 7 8" />
+                                            <line x1="12" y1="3" x2="12" y2="15" />
+                                        </svg>
+                                        Choose File
+                                    </label>
+                                    <input type="file" id="ImageUpload" name="Image" accept=".png,.jpg" />
+                                </div>
+                            </div>
+                        </div> *@
+
+
+
+
+
+                        <div class="form-group form-horizontal">
+                            <div class="logo-section">
+                                <label class="control-label">Logo<i style="color: red"> *</i></label>
+                                <input class="form-control" type="hidden" name="LogoUrl" id="LogoUrl" />
+                                <div class="logo-inner">
+                                    <div class="img-preview" id="previewBox" onclick="document.getElementById('ImageUpload').click()">
+                                        @* <img id="companyImage" src="" alt="Logo preview" /> *@
+                                        <img src="@imageUrl" id="companyImage" class="img-thumbnail" height="160px" width="140px" />
+                                        <svg id="previewIcon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                                            <circle cx="8.5" cy="8.5" r="1.5" />
+                                            <polyline points="21 15 16 10 5 21" />
+                                        </svg>
+                                        <span id="previewText">Preview</span>
+                                    </div>
+                                    <div class="file-info">
+                                        <p>Upload company logo<br />Accepted: .jpg, .png</p>
+                                        <label class="file-btn" for="ImageUpload">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                                <polyline points="17 8 12 3 7 8" />
+                                                <line x1="12" y1="3" x2="12" y2="15" />
+                                            </svg>
+                                            Choose File
+                                        </label>
+                                        @* <input type="file" id="ImageUpload" name="Image" accept=".png,.jpg" /> *@
+                                        <input class="form-control" id="ImageUpload" name="Image" type="file" accept=".png, .jpg" style="width: 88%" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @* <div class="form-group form-horizontal">
+                            <div class="form-group">
+                                <div class="logo-section">
+                                    <div class="col-md-3">
+                                        <label class="control-label">Logo<i style="color: red"> *</i></label><br />
+
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" type="hidden" name="LogoUrl" id="LogoUrl" />
+                                        <input class="form-control" id="ImageUpload" name="Image" type="file" accept=".png, .jpg" style="width: 88%" />
+                                        <img src="@imageUrl" id="companyImage" class="img-thumbnail" height="160px" width="140px" />
+                                    </div>
+                                    <br />
+                                    <br />
+                                </div>
+                            </div>
+                        </div> *@
+
+                        <!-- ACTION BUTTONS -->
                         @Html.HiddenFor(c => c.Id)
                         <div class="form-group">
-                            <div class="col-md-3"></div>
-                            <div class="col-md-8 col-sm-10" style="padding-left: 0">
-                                <div class="form-group col-md-3 col-sm-3" style="padding-left: 4px" id="save-div">
-                                    <a class="btn btn-primary btn-block" id="btnSubmit"><i class="glyphicon glyphicon-floppy-save"> SAVE</i></a>
-                                </div>
-                                <div class="form-group col-md-3 col-sm-3" style="padding-left: 0" id="update-div">
-                                    <a class="btn btn-primary btn-block" id="btnUpdate"><i class="glyphicon glyphicon-edit"> UPDATE</i></a>
-                                </div>
+                            <div class="btn-row">
+                                @* <div class="col-md-3"></div> *@
+                                <div class="col-md-12 col-sm-10" style="padding-left: 0">
 
-                                <div class="form-group col-md-3 col-sm-3" style="padding-left: 0" id="delete-div">
-                                    <a class="btn btn-primary btn-block" id="btnDelete"><i class="glyphicon glyphicon-trash"> DELETE</i></a>
-                                </div>
-                                <div class="form-group col-md-3 col-sm-3" style="padding-left: 0">
-                                    <a class="btn btn-primary btn-block" id="btnClear"> <i class="glyphicon glyphicon-refresh"> CLEAR</i> </a>
+
+                                    <div class="form-group col-md-3 col-sm-2" id="save-div">
+
+                                        @* <a class="btn btn-primary btn-block" id="btnSubmit"><i class="glyphicon glyphicon-floppy-save"> SAVE</i></a> *@
+
+                                        <a class="btn btn-save btn-block" id="btnSubmit"><i class="glyphicon glyphicon-floppy-save"> SAVE</i></a>
+                                    </div>
+                                    <div class="form-group col-md-3 col-sm-2" id="update-div">
+                                        @* <a class="btn btn-primary btn-block" id="btnUpdate"><i class="glyphicon glyphicon-edit"> UPDATE</i></a> *@
+
+                                        <a class="btn btn-update btn-block" id="btnUpdate"><i class="glyphicon glyphicon-edit"> UPDATE</i></a>
+                                    </div>
+
+                                    <div class="form-group col-md-3 col-sm-2" id="delete-div">
+                                        @* <a class="btn btn-primary btn-block" id="btnDelete"><i class="glyphicon glyphicon-trash"> DELETE</i></a> *@
+
+                                        <a class="btn btn-delete btn-block" id="btnDelete"><i class="glyphicon glyphicon-trash"> DELETE</i></a>
+                                    </div>
+                                    <div class="form-group col-md-3 col-sm-2">
+                                        @*  <a class="btn btn-primary btn-block" id="btnClear"> <i class="glyphicon glyphicon-refresh"> CLEAR</i> </a> *@
+
+                                        <a class="btn btn-clean btn-block" id="btnClear" style="border:1px solid #C0DD97;"> <i class="glyphicon glyphicon-refresh"> CLEAR</i> </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

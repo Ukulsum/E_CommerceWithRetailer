@@ -168,10 +168,11 @@
 
 
 
-    <!--<div>
+    @* <div>
         @RenderBody()
-    </div>-->
-    @await RenderSectionAsync("Styles", required: false)
+    </div> *@
+    @* @await RenderSectionAsync("Styles", required: false) *@
+    @RenderSection("ViewSpecificJavascript", required: false)
 
 </body>
 </html>
